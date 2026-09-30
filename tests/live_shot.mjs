@@ -1,0 +1,16 @@
+import { createRequire } from 'module';
+const require = createRequire('D:/Projects/_e2e-tools/package.json');
+const puppeteer = require('puppeteer-core');
+const url = process.argv[2], out = process.argv[3], w = +(process.argv[4] || 1440), h = +(process.argv[5] || 900);
+const browser = await puppeteer.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: 'new', args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--hide-scrollbars'] });
+const page = await browser.newPage();
+const errors = [];
+page.on('pageerror', (e) => errors.push(e.message));
+page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+await page.setViewport({ width: w, height: h, isMobile: w < 600, hasTouch: w < 600 });
+await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
+await new Promise((r) => setTimeout(r, 7000));
+const is3d = await page.evaluate(() => document.querySelector('.hero')?.classList.contains('is-3d'));
+await page.screenshot({ path: out });
+console.log(JSON.stringify({ is3d, errors }));
+await browser.close();
