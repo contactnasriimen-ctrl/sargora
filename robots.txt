@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://contactnasriimen-ctrl.github.io/sargora/sitemap.xml

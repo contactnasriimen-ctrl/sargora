@@ -1,0 +1,55 @@
+/* Sargora — cartes d'accès produits (partagé site + admin) */
+/* ---------- Carte d'accès produit ---------- */
+.pcard {
+  --c1: #1a2440; --c2: #0a0f1e; --c3: #ddb25c; --ink: #fff;
+  position: relative; width: 100%; aspect-ratio: 1.586; border-radius: 18px; overflow: hidden; color: var(--ink); isolation: isolate;
+  background: radial-gradient(120% 100% at 0% 0%, var(--c1) 0%, transparent 62%), radial-gradient(90% 90% at 100% 100%, var(--c1) 0%, transparent 70%), var(--c2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), inset 0 0 0 1px rgba(255, 255, 255, .1), 0 30px 50px -25px rgba(0, 0, 0, .9);
+  container-type: inline-size;
+}
+.pcard::before { content: ""; position: absolute; inset: 7px; border-radius: 13px; border: 1px solid rgba(236, 202, 125, .22); pointer-events: none; z-index: 2; }
+.pcard::after { content: ""; position: absolute; inset: 0; z-index: 0; opacity: .5; background: repeating-linear-gradient(115deg, transparent 0 22px, rgba(255, 255, 255, .025) 22px 23px); }
+.pcard__glyph { position: absolute; right: -2%; bottom: -16%; z-index: 1; font-family: var(--f-display); font-weight: 700; font-size: 44cqw; line-height: 1; color: var(--c3); opacity: .16; letter-spacing: -.04em; white-space: nowrap; }
+.pcard__top { position: absolute; left: 7%; right: 7%; top: 10%; z-index: 2; display: flex; justify-content: space-between; align-items: flex-start; }
+.pcard__brand { font-family: var(--f-display); font-size: 5cqw; letter-spacing: .22em; font-weight: 600; background: var(--grad-gold); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1.2; }
+.pcard__brand i { display: block; font-family: var(--f-body); font-style: normal; font-size: .62em; letter-spacing: .5em; font-weight: 500; }
+.pcard__chip { width: 13%; aspect-ratio: 1.3; border-radius: 4px; background: linear-gradient(135deg, #f6e2a6, #b88b35 55%, #f1d185); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2); position: relative; }
+.pcard__chip::after { content: ""; position: absolute; inset: 22% 0; border-block: 1px solid rgba(0, 0, 0, .25); }
+.pcard__bottom { position: absolute; left: 7%; right: 30%; bottom: 10%; z-index: 2; display: grid; gap: 1cqw; }
+.pcard__cat { font-size: 3.6cqw; letter-spacing: .14em; text-transform: uppercase; opacity: .7; }
+.pcard__name { font-size: 7.4cqw; font-weight: 600; line-height: 1.1; letter-spacing: -.02em; text-shadow: 0 2px 12px rgba(0, 0, 0, .35); }
+.pcard__shine { position: absolute; inset: -50%; z-index: 3; pointer-events: none; background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, .22) 50%, transparent 60%); transform: translateX(-60%); transition: transform 1.2s var(--ease); }
+.tilt:hover .pcard__shine, .fan__card:hover .pcard__shine { transform: translateX(60%); }
+.pcard--lg { border-radius: 26px; }
+.pcard--lg::before { inset: 10px; border-radius: 18px; }
+
+/* Thèmes (inspirés des couleurs de chaque univers, sans logos officiels) */
+.th-gold { --c1: #22335e; --c2: #080d1c; --c3: #ecca7d; }
+.th-emerald { --c1: #13896c; --c2: #04231c; --c3: #6ff2c8; }
+.th-obsidian { --c1: #2a2a2a; --c2: #030303; --c3: #ecca7d; }
+.th-clay { --c1: #c96442; --c2: #3a150b; --c3: #ffd2b8; }
+.th-aurora { --c1: #4a63e7; --c2: #1d0f47; --c3: #f5a3e3; }
+.th-mono { --c1: #4a4a4a; --c2: #0a0a0a; --c3: #ffffff; }
+.th-teal { --c1: #1f8793; --c2: #05262a; --c3: #94fff3; }
+.th-violet { --c1: #7d2ae8; --c2: #170941; --c3: #3fe0e8; }
+.th-crimson { --c1: #e0303f; --c2: #34060d; --c3: #ffb0b8; }
+.th-ink { --c1: #2c2f33; --c2: #000; --c3: #29f5ee; }
+.th-lime { --c1: #62982c; --c2: #122007; --c3: #c6ff8a; }
+.th-azure { --c1: #1a6cf0; --c2: #061c42; --c3: #9fcbff; }
+.th-ruby { --c1: #c20a14; --c2: #170103; --c3: #ff6a70; }
+.th-green { --c1: #1db954; --c2: #031b0c; --c3: #8cffb2; }
+.th-scarlet { --c1: #e8112d; --c2: #260307; --c3: #ffc0c8; }
+.th-jade { --c1: #0fa18c; --c2: #03241f; --c3: #8bffe6; }
+.th-sunset { --c1: #e6582a; --c2: #3a1105; --c3: #ffd07c; }
+.th-mint { --c1: #13b088; --c2: #032c22; --c3: #b2ffe9; }
+.th-paper { --c1: #fbfaf7; --c2: #cfcac0; --c3: #111; --ink: #15120c; }
+.th-ice { --c1: #3176ec; --c2: #07183a; --c3: #b6d8ff; }
+.th-cobalt { --c1: #0a66c2; --c2: #031d38; --c3: #a8d1ff; }
+.th-paper .pcard__glyph { opacity: .12; }
+.th-paper .pcard__name { text-shadow: none; }
+
+/* Vignette produit (panier) */
+.pthumb { --c1: #22335e; --c2: #080d1c; --c3: #ecca7d; --ink: #fff; flex: none; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 14px; background: radial-gradient(100% 100% at 0 0, var(--c1), var(--c2)); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); font-family: var(--f-display); font-weight: 700; color: var(--c3); font-size: 1.05rem; overflow: hidden; }
+.pthumb--xs { width: 42px; height: 42px; border-radius: 10px; font-size: .78rem; }
+.pthumb span { max-width: 90%; overflow: hidden; white-space: nowrap; }
+
