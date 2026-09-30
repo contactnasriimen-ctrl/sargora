@@ -1,0 +1,43 @@
+# Sargora — configuration Apache
+Options -Indexes -MultiViews
+DirectoryIndex index.php
+AddDefaultCharset utf-8
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Dossiers et fichiers sensibles
+  RewriteRule ^(app|data|sql|tools|_build|tests)(/|$) - [R=404,L]
+  RewriteRule (^|/)\. - [R=404,L]
+  RewriteRule \.(sqlite|sql|md|bat|ps1|log|ini)$ - [R=404,L]
+  RewriteRule ^router\.php$ - [R=404,L]
+
+  # Tout ce qui n'est pas un fichier réel passe par le contrôleur frontal
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+ErrorDocument 404 /index.php
+
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType application/manifest+json .webmanifest
+  AddType text/javascript .js .mjs
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  <IfModule mod_filter.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml application/xml
+  </IfModule>
+</IfModule>

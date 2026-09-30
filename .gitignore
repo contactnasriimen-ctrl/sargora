@@ -1,0 +1,4 @@
+/data/*.sqlite*
+/app/config.local.php
+/tests/*.png
+/dist/
